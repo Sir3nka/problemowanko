@@ -1,7 +1,6 @@
 package com.sirenka.datamanager.functional;
 
 
-import com.sirenka.datamanager.model.IHandlePayload;
 import com.sirenka.datamanager.model.ResponseClass;
 
 public class EvaluateOutcome <T> {

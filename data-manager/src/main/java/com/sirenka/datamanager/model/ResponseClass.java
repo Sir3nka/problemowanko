@@ -6,7 +6,7 @@ import lombok.Getter;
 import lombok.Setter;
 
 @Builder
-public class ResponseClass implements IHandlePayload {
+public class ResponseClass{
     @Getter
     private String content;
 }
