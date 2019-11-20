@@ -5,8 +5,8 @@ import com.sirenka.datamanager.model.Offer;
 import java.util.List;
 
 public interface IOfferService {
-    boolean saveOffer(Offer of);
-    boolean saveOffers(List<Offer> of);
+    void saveOffer(Offer of) throws OfferException;
+    void saveOffers(List<Offer> of) throws OfferException;
 //    Offer getByCompanyName(String name);
     List<Offer> getAllOffers();
 

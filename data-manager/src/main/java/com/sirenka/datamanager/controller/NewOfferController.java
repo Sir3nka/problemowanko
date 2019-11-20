@@ -1,7 +1,6 @@
 package com.sirenka.datamanager.controller;
 
-import com.sirenka.datamanager.functional.EvaluateOutcome;
-import com.sirenka.datamanager.functional.IBooleanExecute;
+import com.sirenka.datamanager.functional.HandleExecution;
 import com.sirenka.datamanager.model.Offer;
 import com.sirenka.datamanager.model.ResponseClass;
 import com.sirenka.datamanager.service.IOfferService;
@@ -14,18 +13,27 @@ import java.util.List;
 @RestController
 public class NewOfferController {
     private final IOfferService offerService;
+
     @RequestMapping("/new.offer")
     @PostMapping
     public ResponseClass saveSubmittedOffer(@RequestBody Offer off) {
-        IBooleanExecute<Offer> referencedMethod = offerService::saveOffer;
-        return new EvaluateOutcome<Offer>().evaluateActionOutcome(referencedMethod, off);
+        try {
+            new HandleExecution<Offer>().executeThrowableFunction(offerService::saveOffer, off);
+        } catch (Exception ex) {
+            return ResponseClass.builder().content(ex.getMessage()).build();
+        }
+        return ResponseClass.builder().content("Succesfully added offers to data base!").build();
     }
 
     @RequestMapping("/new.offers")
     @PostMapping
-    public ResponseClass saveSubmittedOffer(@RequestBody List<Offer> off) {
-        IBooleanExecute<List<Offer>> referencedMethod = offerService::saveOffers;
-        return new EvaluateOutcome<List<Offer>>().evaluateActionOutcome(referencedMethod, off);
+    public ResponseClass saveSubmittedOffers(@RequestBody List<Offer> off) {
+        try {
+            new HandleExecution<List<Offer>>().executeThrowableFunction(offerService::saveOffers, off);
+        } catch (Exception ex) {
+            return ResponseClass.builder().content(ex.getMessage()).build();
+        }
+        return ResponseClass.builder().content("Succesfully added offers to data base!").build();
     }
 
 }

@@ -2,6 +2,7 @@ package com.sirenka.datamanager.datatest;
 
 import com.sirenka.datamanager.controller.NewOfferController;
 import com.sirenka.datamanager.model.Offer;
+import com.sirenka.datamanager.service.OfferException;
 import com.sirenka.datamanager.service.OfferService;
 import org.junit.Before;
 import org.junit.Test;
@@ -27,28 +28,44 @@ public class NewOfferControllerTest {
     @Test
     public void newOffer() {
         Offer of = new Offer();
-        when(offerService.saveOffer(of)).thenReturn(true);
-        assert(newOfferController.saveSubmittedOffer(of).getContent().equals("Succesfully completed request"));
+        try {
+            doNothing().when(offerService).saveOffer(of);
+        } catch (OfferException ex){
+
+        }
+        assert(newOfferController.saveSubmittedOffer(of).getContent().equals("Succesfully added offers to data base!"));
     }
 
     @Test
     public void FailedNewOffer() {
         Offer of = new Offer();
-        when(offerService.saveOffer(of)).thenReturn(false);
-        assert(newOfferController.saveSubmittedOffer(of).getContent().equals("Failed to execute request"));
+        try {
+            doThrow(new OfferException("test")).when(offerService).saveOffer(of);
+        } catch (OfferException ex) {
+
+        }
+        assert(!newOfferController.saveSubmittedOffer(of).getContent().equals("Failed to execute request"));
     }
 
     @Test
-    public void ewOffers() {
+    public void newOffers() {
         List<Offer> of = Arrays.asList(new Offer());
-        when(offerService.saveOffers(of)).thenReturn(true);
-        assert(newOfferController.saveSubmittedOffer(of).getContent().equals("Succesfully completed request"));
+        try {
+            doNothing().when(offerService).saveOffers(of);;
+        } catch (OfferException ex) {
+
+        }
+        assert(newOfferController.saveSubmittedOffers(of).getContent().equals("Succesfully added offers to data base!"));
     }
 
     @Test
     public void failedNewOffer() {
-        Offer of = new Offer();
-        when(offerService.saveOffer(of)).thenReturn(false);
-        assert(newOfferController.saveSubmittedOffer(of).getContent().equals("Failed to execute request"));
+        List<Offer> of = Arrays.asList(new Offer());
+        try {
+            doThrow(new OfferException("test")).when(offerService).saveOffers(of);
+        }catch (OfferException ex) {
+
+        }
+        assert(!newOfferController.saveSubmittedOffers(of).getContent().equals("Failed to execute request"));
     }
 }
