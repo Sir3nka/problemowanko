@@ -18,7 +18,7 @@ public class NewOfferController {
     @PostMapping
     public ResponseClass saveSubmittedOffer(@RequestBody Offer off) {
         try {
-            new HandleExecution<Offer>().executeThrowableFunction(offerService::saveOffer, off);
+            new HandleExecution<IOfferService>().executeThrowableFunction(handler -> handler.saveOffer(off), offerService);
         } catch (Exception ex) {
             return ResponseClass.builder().content(ex.getMessage()).build();
         }
@@ -29,7 +29,7 @@ public class NewOfferController {
     @PostMapping
     public ResponseClass saveSubmittedOffers(@RequestBody List<Offer> off) {
         try {
-            new HandleExecution<List<Offer>>().executeThrowableFunction(offerService::saveOffers, off);
+            new HandleExecution<IOfferService>().executeThrowableFunction(handler -> handler.saveOffers(off), offerService);
         } catch (Exception ex) {
             return ResponseClass.builder().content(ex.getMessage()).build();
         }
