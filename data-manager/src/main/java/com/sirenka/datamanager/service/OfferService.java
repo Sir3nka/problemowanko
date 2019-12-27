@@ -18,11 +18,11 @@ public class OfferService implements IOfferService {
     private final OfferRepository offerRepository;
 
     public void saveOffer(Offer of) throws OfferException {
-        if (offerRepository.save(of) != null ) throw new OfferException("Failed to add offer to data base");
+        if (offerRepository.save(of) == null ) throw new OfferException("Failed to add offer to data base");
     }
 
     public void saveOffers(List<Offer> of) throws OfferException {
-        if (offerRepository.save(of) != null) throw new OfferException("Failed to add offer to data base");
+        if (offerRepository.save(of) == null) throw new OfferException("Failed to add offer to data base");
     }
 //
 //    public Offer getByCompanyName(String name) {
