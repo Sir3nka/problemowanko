@@ -13,7 +13,7 @@ import java.util.List;
 
 @AllArgsConstructor
 @RestController
-@RequestMapping("/get.offers")
+@RequestMapping("/getOffers")
 public class FetchOffersController {
     private final IOfferService offerService;
 

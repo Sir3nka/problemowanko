@@ -14,7 +14,7 @@ import java.util.List;
 public class NewOfferController {
     private final IOfferService offerService;
 
-    @RequestMapping("/new.offer")
+    @RequestMapping("/newOffer")
     @PostMapping
     public ResponseClass saveSubmittedOffer(@RequestBody Offer off) {
         try {
@@ -25,7 +25,7 @@ public class NewOfferController {
         return ResponseClass.builder().content("Succesfully added offers to data base!").build();
     }
 
-    @RequestMapping("/new.offers")
+    @RequestMapping("/newOffers")
     @PostMapping
     public ResponseClass saveSubmittedOffers(@RequestBody List<Offer> off) {
         try {

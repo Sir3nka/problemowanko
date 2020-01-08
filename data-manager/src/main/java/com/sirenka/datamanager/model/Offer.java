@@ -25,11 +25,11 @@ public class Offer {
     @Getter
     private String url;
     @Getter
-    private String company_name;
+    private String companyName;
     @Getter
-    private String company_logo_url;
+    private String companyLogoUrl;
     @Getter
-    private String job_title;
+    private String jobTitle;
     @Getter
     private String salary;
 }

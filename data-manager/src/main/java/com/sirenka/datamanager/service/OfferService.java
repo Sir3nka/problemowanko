@@ -4,6 +4,8 @@ import com.sirenka.datamanager.functional.IterableHandler;
 import com.sirenka.datamanager.model.Offer;
 import com.sirenka.datamanager.repository.OfferRepository;
 import lombok.AllArgsConstructor;
+import org.springframework.data.domain.Page;
+import org.springframework.data.domain.Pageable;
 import org.springframework.stereotype.Service;
 
 import java.util.ArrayList;
@@ -31,5 +33,8 @@ public class OfferService implements IOfferService {
 
     public List<Offer> getAllOffers() {
         return new IterableHandler<Offer>().makeListOffIterable(offerRepository.findAll());
+    }
+    public Page<Offer> getPageOfOffer(Pageable page) {
+        return offerRepository.findAll(page);
     }
 }
